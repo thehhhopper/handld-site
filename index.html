@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="You find the trades. The rest is handled. A risk desk for traders. Built for funded accounts and Hyperliquid.">
+<meta property="og:title" content="handld">
+<meta property="og:description" content="You find the trades. The rest is handled.">
+<title>handld</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  /* ── tokens: the ledger ─────────────────────────────────────────── */
+  :root {
+    --paper: #EDF0EF;
+    --paper-2: #E3E8E6;
+    --rule: #C7CFCC;
+    --ink: #0F1A24;
+    --ink-2: #4B5760;
+    --ink-3: #7A868E;
+    --stop: #2440C4;
+    --stop-soft: rgba(36, 64, 196, 0.10);
+    --ok: #2F7D5B;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --sans: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --measure: 62ch;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0B1219; --paper-2: #101922; --rule: #22303B;
+      --ink: #E6EAE8; --ink-2: #9AA6AE; --ink-3: #6B7880;
+      --stop: #7D93FF; --stop-soft: rgba(125, 147, 255, 0.14); --ok: #5FB58C;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0B1219; --paper-2: #101922; --rule: #22303B;
+    --ink: #E6EAE8; --ink-2: #9AA6AE; --ink-3: #6B7880;
+    --stop: #7D93FF; --stop-soft: rgba(125, 147, 255, 0.14); --ok: #5FB58C;
+    color-scheme: dark;
+  }
+
+  /* ── base ───────────────────────────────────────────────────────── */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: var(--stop); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--stop); outline-offset: 3px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 24px; }
+
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ── the wordmark: the period is the mark ───────────────────────── */
+  .mark { font-family: var(--mono); font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+  .mark .stop { color: var(--stop); }
+
+  /* ── header ─────────────────────────────────────────────────────── */
+  header .wrap {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-block: 28px 0; gap: 16px;
+  }
+  header .mark { font-size: 22px; }
+  .linkbtn {
+    font: inherit; font-family: var(--mono); font-size: 13px; color: var(--ink-2);
+    background: none; border: 0; padding: 0; cursor: pointer;
+  }
+  .linkbtn:hover { color: var(--stop); text-decoration: underline; text-underline-offset: 3px; }
+  button.btn { cursor: pointer; font: inherit; font-family: var(--mono); font-size: 14px; font-weight: 500; }
+
+  /* ── the access request: a ledger entry in a dialog ─────────────── */
+  dialog.access {
+    background: var(--paper); color: var(--ink); border: 1px solid var(--ink);
+    border-radius: 2px; padding: 0; width: min(520px, calc(100vw - 32px));
+    box-shadow: none;
+  }
+  dialog.access::backdrop { background: rgba(15, 26, 36, 0.55); }
+  dialog.access .inner { padding: 28px 28px 24px; display: grid; gap: 18px; }
+  dialog.access .top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  dialog.access h2 { font-size: 26px; margin: 0; max-width: none; }
+  dialog.access .close { font-family: var(--mono); font-size: 13px; color: var(--ink-2); background: none; border: 0; cursor: pointer; padding: 4px 0; }
+  dialog.access .close:hover { color: var(--stop); }
+  dialog.access p { margin: 0; color: var(--ink-2); font-size: 15px; }
+  dialog.access label.field { display: grid; gap: 8px; }
+  dialog.access label.field span { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+  dialog.access input[type="email"] {
+    font: inherit; font-family: var(--mono); font-size: 15px; color: var(--ink);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 2px;
+    padding: 12px 14px; width: 100%;
+  }
+  dialog.access input[type="email"]:focus { border-color: var(--stop); outline: none; }
+  dialog.access label.consent { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: start; font-size: 14px; color: var(--ink-2); cursor: pointer; }
+  dialog.access label.consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--stop); cursor: pointer; }
+  dialog.access .actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  dialog.access .btn[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+  dialog.access .err { font-family: var(--mono); font-size: 13px; color: var(--stop); min-height: 1.4em; }
+  dialog.access .done { display: none; }
+  dialog.access[data-state="done"] .form { display: none; }
+  dialog.access[data-state="done"] .done { display: grid; gap: 12px; }
+  dialog.access .done .line { font-family: var(--mono); font-size: 18px; font-weight: 500; }
+  dialog.access .done .line .stop { color: var(--stop); font-weight: 600; }
+
+  /* ── ledger grid: ref column, margin line, content ───────────────── */
+  .ledger {
+    display: grid; grid-template-columns: 128px 1fr; column-gap: 40px;
+    position: relative;
+  }
+  .ledger::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 148px; width: 1px;
+    background: var(--stop); opacity: 0.45;
+  }
+  .ledger > .ref { padding-top: 6px; }
+  section { border-top: 1px solid var(--rule); }
+  section .ledger { padding-block: 72px; }
+
+  /* ── hero ───────────────────────────────────────────────────────── */
+  .hero .ledger { padding-block: 88px 80px; }
+  h1 {
+    font-size: clamp(38px, 6.2vw, 72px); line-height: 1.02; letter-spacing: -0.025em;
+    font-weight: 700; margin: 0 0 24px; text-wrap: balance; max-width: 21ch;
+  }
+  .lede { font-size: 20px; line-height: 1.5; color: var(--ink-2); max-width: var(--measure); margin: 0 0 40px; text-wrap: pretty; }
+
+  .exchange {
+    font-family: var(--mono); font-size: 15px; line-height: 1.7;
+    background: var(--paper-2); border: 1px solid var(--rule);
+    padding: 22px 24px; max-width: 560px; margin: 0 0 36px;
+    display: grid; grid-template-columns: 56px 1fr; row-gap: 6px; column-gap: 12px;
+  }
+  .exchange .who { color: var(--ink-3); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 3px; }
+  .exchange .line { color: var(--ink); white-space: pre-wrap; min-height: 1.7em; }
+  .exchange .line .stop { color: var(--stop); font-weight: 600; }
+  .exchange .cursor { display: inline-block; width: 0.6ch; height: 1.1em; vertical-align: -0.2em; background: var(--ink-2); margin-left: 1px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .exchange .cursor { display: none; } }
+
+  .cta { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    background: var(--ink); color: var(--paper); padding: 14px 22px;
+    border-radius: 2px; border: 1px solid var(--ink); display: inline-block;
+  }
+  .btn:hover { background: var(--stop); border-color: var(--stop); color: #fff; text-decoration: none; }
+  .quiet { font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
+
+  /* ── sections ───────────────────────────────────────────────────── */
+  h2 {
+    font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em;
+    font-weight: 700; margin: 0 0 20px; text-wrap: balance; max-width: 20ch;
+  }
+  p { max-width: var(--measure); margin: 0 0 18px; text-wrap: pretty; }
+  p.dim { color: var(--ink-2); }
+
+  /* the grammar table */
+  .grammar { border-top: 1px solid var(--ink); margin-top: 32px; max-width: 760px; }
+  .grammar .row {
+    display: grid; grid-template-columns: 180px 1fr; gap: 24px;
+    padding: 16px 0; border-bottom: 1px solid var(--rule);
+  }
+  .grammar .head { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--rule); }
+  .grammar .give { font-family: var(--mono); font-weight: 500; }
+  .grammar .give.none { color: var(--ink-3); }
+  .grammar .decide { color: var(--ink-2); }
+
+  /* what you never see: redacted ledger */
+  .hidden-ledger { max-width: 640px; margin-top: 32px; border-top: 1px solid var(--ink); }
+  .hidden-ledger .row {
+    display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: center;
+    padding: 14px 0; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 14px;
+  }
+  .hidden-ledger .redact { height: 12px; background: var(--ink); opacity: 0.85; border-radius: 1px; }
+  .hidden-ledger .yes { color: var(--ok); font-weight: 500; }
+  .hidden-ledger .yes::before { content: "● "; }
+
+  /* rules: a real rulebook, so the numbers carry meaning */
+  .rules { list-style: none; margin: 32px 0 0; padding: 0; max-width: 760px; border-top: 1px solid var(--ink); counter-reset: rule; }
+  .rules li {
+    display: grid; grid-template-columns: 56px 1fr; gap: 16px;
+    padding: 22px 0; border-bottom: 1px solid var(--rule); counter-increment: rule;
+  }
+  .rules li::before { content: counter(rule, decimal-leading-zero); font-family: var(--mono); font-size: 13px; color: var(--stop); padding-top: 5px; }
+  .rules h3 { font-size: 21px; line-height: 1.25; margin: 0 0 8px; font-weight: 600; letter-spacing: -0.01em; }
+  .rules p { margin: 0; color: var(--ink-2); font-size: 16px; }
+
+
+  /* footer */
+  footer { border-top: 1px solid var(--ink); }
+  footer .wrap { display: grid; grid-template-columns: 128px 1fr; column-gap: 40px; padding-block: 40px 56px; }
+  footer .mark { font-size: 20px; }
+  footer .cols { display: flex; flex-wrap: wrap; gap: 28px 48px; font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
+  footer .cols a { color: var(--ink-2); }
+  footer .cols a:hover { color: var(--stop); }
+  footer .fine { margin-top: 24px; font-size: 13px; color: var(--ink-3); max-width: 60ch; }
+
+  /* ── phone ──────────────────────────────────────────────────────── */
+  @media (max-width: 720px) {
+    .ledger { grid-template-columns: 1fr; row-gap: 14px; }
+    .ledger::before { display: none; }
+    .ledger > .ref { padding-top: 0; }
+    section .ledger { padding-block: 52px; }
+    .hero .ledger { padding-block: 56px; }
+    .grammar .row { grid-template-columns: 1fr; gap: 6px; }
+    .grammar .head { display: none; }
+    .hidden-ledger .row { grid-template-columns: 1fr 120px; }
+    .rules li { grid-template-columns: 40px 1fr; }
+    footer .wrap { grid-template-columns: 1fr; row-gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="mark">handld<span class="stop">.</span></div>
+    <nav><button type="button" class="linkbtn" data-open-access>Request access</button></nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">A risk desk<br>for traders</div>
+        <div>
+          <h1>You find the trades. The rest is handled.</h1>
+          <p class="lede">Direction, symbol, invalidation. handld sizes the position, places the stop where a sweep can't reach it, and closes the day when your rules say so. You never see the account.</p>
+
+          <div class="exchange" id="exchange" aria-label="An example exchange with the desk">
+            <div class="who">you</div>
+            <div class="line" id="line-you">long BTC invalidation 76500</div>
+            <div class="who">desk</div>
+            <div class="line" id="line-desk">Handled<span class="stop">.</span> Go find the next one<span class="stop">.</span></div>
+          </div>
+
+          <div class="cta">
+            <button type="button" class="btn" data-open-access>Request access</button>
+            <a class="quiet" href="#how">How it decides ↓</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">Why</div>
+        <div>
+          <h2>Accounts don't die from the market. They die from the trader.</h2>
+          <p class="dim">The size bump after a red week. The stop moved at two in the afternoon because today feels different. Just this once. Every one of them is a decision made with the number in front of you.</p>
+          <p>handld takes the number away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">The grammar</div>
+        <div>
+          <h2>Three words in. One line back.</h2>
+          <p class="dim">That is the whole interface. There is no way to say "double size" or "ignore the daily limit". The grammar doesn't have the words.</p>
+
+          <div class="grammar" role="table" aria-label="What you give and what the ruleset decides">
+            <div class="row head" role="row"><div>You give</div><div>The ruleset</div></div>
+            <div class="row" role="row"><div class="give">direction</div><div class="decide">Whether the trade happens at all</div></div>
+            <div class="row" role="row"><div class="give">symbol</div><div class="decide">Size, from your invalidation and your own record</div></div>
+            <div class="row" role="row"><div class="give">invalidation</div><div class="decide">Where the stop actually goes: beyond the last swing if yours sits inside it</div></div>
+            <div class="row" role="row"><div class="give none">&middot;</div><div class="decide">Breakeven, trail, time stop</div></div>
+            <div class="row" role="row"><div class="give none">&middot;</div><div class="decide">When the day is over</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="unseen">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">What you don't see</div>
+        <div>
+          <h2>Taken and not taken read identically.</h2>
+          <p class="dim">A confirmed fill is the thread you'd pull to reconstruct your own P&amp;L. So the reply is always the same, and the account stays behind the desk.</p>
+
+          <div class="hidden-ledger" aria-label="What is and isn't visible">
+            <div class="row"><div>position size</div><div class="redact" aria-label="hidden"></div></div>
+            <div class="row"><div>capital in use</div><div class="redact" aria-label="hidden"></div></div>
+            <div class="row"><div>result of the last trade</div><div class="redact" aria-label="hidden"></div></div>
+            <div class="row"><div>balance</div><div class="redact" aria-label="hidden"></div></div>
+            <div class="row"><div>is the desk running</div><div class="yes">connected</div></div>
+            <div class="row"><div>does the symbol exist</div><div class="yes">yes</div></div>
+          </div>
+          <p class="dim" style="margin-top:20px">Two things are never hidden, because neither is a risk decision: whether the machine is running, and whether a symbol exists.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">Rules that can't be talked out of</div>
+        <div>
+          <h2>Everything moves one way.</h2>
+          <p class="dim">The desk can always reduce your exposure. It can never increase it on the spot.</p>
+          <ol class="rules">
+            <li><div><h3>Tightening is instant. Loosening takes seven days.</h3><p>Cut your daily limit and it's cut now. Raise it and the old rule stays live for a week. Cancel the raise and that's instant again.</p></div></li>
+            <li><div><h3>Risk is earned, not set.</h3><p>Everyone starts at half a percent. The desk raises it only when your own results are statistically clear of breakeven, and cuts it the moment they aren't.</p></div></li>
+            <li><div><h3>A stop moves further away, never closer.</h3><p>If your invalidation sits where a sweep would take it, the stop goes beyond the swing. The cost lands on size, never on risk.</p></div></li>
+            <li><div><h3>Silver is silver.</h3><p>Two tickers on one metal are one position. A second call inside a live group waits its turn.</p></div></li>
+            <li><div><h3>Minus two R ends the day.</h3><p>Not two red trades. Two units of realised loss, however you got there. The lockout lives on the server. Restarting the terminal doesn't clear it.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">Who it's for</div>
+        <div>
+          <h2>Built for funded accounts and Hyperliquid.</h2>
+          <p class="dim">A daily-drawdown breach doesn't cost you a bad day. It costs the account and the payout behind it. handld enforces the firm's line at eighty percent of the line, never at it, and refuses a trade it couldn't hold to its own time stop before the forced flat.</p>
+          <p class="dim">On Hyperliquid the desk trades through an API wallet that can place orders but cannot withdraw. The worst a compromised desk can do is trade badly. It cannot take the money.</p>
+          <p>Your own cash works too. The rules are the same; the profile is different. More exchanges are coming.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mark">handld<span class="stop">.</span></div>
+    <div>
+      <div class="cols">
+        <a href="https://handld.xyz">handld.xyz</a>
+        <button type="button" class="linkbtn" data-open-access>Request access</button>
+      </div>
+      <p class="fine">handld never picks a direction and never charges a performance fee. It executes and constrains on an account you control, under rules you set once and can only loosen slowly.</p>
+    </div>
+  </div>
+</footer>
+
+<dialog class="access" id="access" aria-labelledby="access-title">
+  <form class="inner" method="dialog" id="access-form" novalidate>
+    <div class="top">
+      <h2 id="access-title">Request access.</h2>
+      <button type="button" class="close" data-close-access aria-label="Close">close</button>
+    </div>
+
+    <div class="form" style="display: grid; gap: 18px;">
+      <p>handld is in private testing. Leave an email and we'll write when there's a seat. Nothing else.</p>
+
+      <label class="field" for="access-email">
+        <span>email</span>
+        <input type="email" id="access-email" name="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="you@example.com" required>
+      </label>
+
+      <label class="consent" for="access-consent">
+        <input type="checkbox" id="access-consent" name="consent" required>
+        <span>I agree that handld stores this address to contact me about access. No newsletter, no third parties, nothing else. Delete it on request: write to the same address.</span>
+      </label>
+
+      <div class="actions">
+        <a class="btn" id="access-send" href="#" aria-disabled="true" rel="noopener">Request access</a>
+        <span class="err" id="access-err" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <div class="done" aria-live="polite">
+      <div class="line">Handled<span class="stop">.</span> Your request is with the desk<span class="stop">.</span></div>
+      <p id="access-done-note">We'll write when there's a seat.</p>
+      <div class="actions"><button type="button" class="linkbtn" data-close-access>Close</button></div>
+    </div>
+  </form>
+</dialog>
+
+<script>
+  // ── access request ────────────────────────────────────────────────
+  // FORM_ENDPOINT: leave empty on this preview, where the sandbox cannot
+  // post anywhere, and the request opens in the visitor's mail client.
+  // On handld.xyz set it to a real endpoint and the form posts JSON:
+  //   { email, consent: true, consentedAt, source: "landing" }
+  (function () {
+    var FORM_ENDPOINT = "";
+    var CONTACT = "hello@handld.xyz";
+
+    var dlg = document.getElementById("access");
+    var form = document.getElementById("access-form");
+    var email = document.getElementById("access-email");
+    var consent = document.getElementById("access-consent");
+    var send = document.getElementById("access-send");
+    var err = document.getElementById("access-err");
+    var note = document.getElementById("access-done-note");
+    if (!dlg || !form) return;
+
+    function valid() {
+      var ok = email.validity.valid && email.value.trim().length > 3 && consent.checked;
+      send.setAttribute("aria-disabled", ok ? "false" : "true");
+      if (ok && !FORM_ENDPOINT) {
+        var body = "Please add me to the handld access list.\n\nEmail: " + email.value.trim() +
+                   "\nConsent: yes, to be contacted about access only.\nConsented at: " + new Date().toISOString();
+        send.href = "mailto:" + CONTACT + "?subject=" + encodeURIComponent("handld access request") +
+                    "&body=" + encodeURIComponent(body);
+      } else {
+        send.href = "#";
+      }
+      return ok;
+    }
+    email.addEventListener("input", valid);
+    consent.addEventListener("change", valid);
+
+    function open() {
+      dlg.removeAttribute("data-state");
+      form.reset(); err.textContent = ""; valid();
+      if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+      setTimeout(function () { email.focus(); }, 30);
+    }
+    function close() { if (dlg.open) dlg.close(); else dlg.removeAttribute("open"); }
+
+    document.querySelectorAll("[data-open-access]").forEach(function (b) { b.addEventListener("click", open); });
+    document.querySelectorAll("[data-close-access]").forEach(function (b) { b.addEventListener("click", close); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+
+    function done() {
+      dlg.setAttribute("data-state", "done");
+      if (!FORM_ENDPOINT) note.textContent = "If your mail app didn't open, write to " + CONTACT + " and we'll add you.";
+    }
+
+    send.addEventListener("click", function (e) {
+      if (!valid()) {
+        e.preventDefault();
+        err.textContent = !email.validity.valid ? "That email doesn't look right." : "Tick the box so we're allowed to write to you.";
+        return;
+      }
+      err.textContent = "";
+      if (!FORM_ENDPOINT) { setTimeout(done, 400); return; }   // the mailto link handles itself
+      e.preventDefault();
+      send.setAttribute("aria-disabled", "true");
+      fetch(FORM_ENDPOINT, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.value.trim(), consent: true, consentedAt: new Date().toISOString(), source: "landing" })
+      }).then(function (r) {
+        if (!r.ok) throw new Error(String(r.status));
+        done();
+      }).catch(function () {
+        send.setAttribute("aria-disabled", "false");
+        err.textContent = "That didn't go through. Try again, or write to " + CONTACT + ".";
+      });
+    });
+  })();
+
+  // The hero exchange types itself once. The resting state is already in
+  // the HTML, so a thumbnail, a reader without JS, and anyone who asked for
+  // reduced motion all get the finished lines.
+  (function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var you = document.getElementById("line-you");
+    var desk = document.getElementById("line-desk");
+    if (!you || !desk) return;
+    var youText = you.textContent;
+    var deskHTML = desk.innerHTML;
+    you.textContent = ""; desk.innerHTML = "";
+    var cur = document.createElement("span"); cur.className = "cursor";
+    you.appendChild(cur);
+    var i = 0;
+    function type() {
+      if (i <= youText.length) {
+        you.textContent = youText.slice(0, i);
+        you.appendChild(cur);
+        i++;
+        setTimeout(type, 34 + Math.random() * 40);
+      } else {
+        setTimeout(function () {
+          cur.remove();
+          desk.innerHTML = deskHTML;
+        }, 520);
+      }
+    }
+    setTimeout(type, 600);
+  })();
+</script>
+
+</body>
+</html>
