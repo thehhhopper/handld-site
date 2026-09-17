@@ -388,7 +388,7 @@
         <a href="https://handld.xyz">handld.xyz</a>
         <button type="button" class="linkbtn" data-open-access>Request access</button>
       </div>
-      <p class="fine">handld never picks a direction and never charges a performance fee. It executes and constrains on an account you control, under rules you set once and can only loosen slowly.</p>
+      <p class="fine">handld never picks a direction. It executes and constrains on an account you control, under rules you set once and can only loosen slowly.</p>
     </div>
   </div>
 </footer>
@@ -502,26 +502,31 @@
     });
   })();
 
-  // The hero exchange types itself, then repeats after a pause so the
-  // page does not look frozen. Resting HTML stays as the no-JS / reduced-
+  // The hero exchange types BTC, then silver, then repeats so the page
+  // does not look frozen. Resting HTML stays as the no-JS / reduced-
   // motion fallback.
   (function () {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var you = document.getElementById("line-you");
     var desk = document.getElementById("line-desk");
     if (!you || !desk) return;
-    var youText = you.textContent.trim();
     var deskHTML = desk.innerHTML;
+    var lines = [
+      "long BTC invalidation 76500",
+      "short SIL invalidation 32.40"
+    ];
     var cur = document.createElement("span"); cur.className = "cursor";
+    var lineIdx = 0;
     var i = 0;
-    var holdMs = 3200;
-    var gapMs = 900;
+    var holdMs = 2800;
+    var gapMs = 700;
     function clear() {
       you.textContent = "";
       desk.innerHTML = "";
       if (!cur.parentNode) you.appendChild(cur);
     }
     function typeYou() {
+      var youText = lines[lineIdx];
       if (i <= youText.length) {
         you.textContent = youText.slice(0, i);
         you.appendChild(cur);
@@ -531,11 +536,12 @@
         setTimeout(function () {
           if (cur.parentNode) cur.remove();
           desk.innerHTML = deskHTML;
-          setTimeout(restart, holdMs);
+          setTimeout(next, holdMs);
         }, 520);
       }
     }
-    function restart() {
+    function next() {
+      lineIdx = (lineIdx + 1) % lines.length;
       i = 0;
       clear();
       setTimeout(typeYou, gapMs);
