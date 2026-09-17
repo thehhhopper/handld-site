@@ -278,7 +278,7 @@
             <li><div><strong>No more moving the stop "just this once."</strong><span>Stops only move further away. Closer is not a verb here.</span></div></li>
             <li><div><strong>No more blowing or ignoring the daily loss line.</strong><span>The lockout lives on the server.</span></div></li>
             <li><div><strong>No more averaging down or adding size to be right.</strong><span>Same correlation group: a second call waits.</span></div></li>
-            <li><div><strong>No more yeeting the leverage slider or going all-in on the candle.</strong><span>Size comes from your invalidation and your earned risk.</span></div></li>
+            <li><div><strong>No more maxing the leverage slider or going all-in on one candle.</strong><span>Size comes from your invalidation and your earned risk.</span></div></li>
             <li><div><strong>No more staring at PnL until you negotiate with yourself.</strong><span>Taken and refused look the same.</span></div></li>
             <li><div><strong>No more loosening rules mid-tilt.</strong><span>Tighten is instant. Loosen is slow on purpose.</span></div></li>
           </ol>
@@ -367,9 +367,9 @@
       <div class="ledger">
         <div class="ref eyebrow">Who it's for</div>
         <div>
-          <h2>Built for funded seats on Hyperliquid - and your own book.</h2>
-          <p class="dim">On-chain prop firms like Propr are not classic FX props. There is often no consistency rule, no minimum trading days, and no end-of-day flatten ritual. What ends the seat is equity: a daily loss line and a max drawdown (static or trailing), checked with floating PnL included. Touch the line and the account is gone.</p>
-          <p class="dim">handld is built for that world. You map the firm's daily and drawdown limits into the desk. We enforce a buffer inside those lines so a revenge trade or a maxed slider does not spend the seat. Same idea on your own Hyperliquid wallet: risk and objectives first, then the rules hold.</p>
+          <h2>Built for funded traders on Hyperliquid - and your own wallet.</h2>
+          <p class="dim">On-chain prop firms like Propr are not classic FX props. There is often no consistency rule, no minimum trading days, and no end-of-day flatten ritual. What ends the funded account is equity: a daily loss line and a max drawdown (static or trailing), checked with floating PnL included. Touch the line and the account is gone.</p>
+          <p class="dim">handld is built for that world. You map the firm's daily and drawdown limits into the desk. We enforce a buffer inside those lines so a revenge trade or a maxed slider does not blow the account. Same idea on your own Hyperliquid wallet: risk and objectives first, then the rules hold.</p>
           <p class="dim">On Hyperliquid the desk signs with a trade-only agent wallet. It can place and manage orders on your behalf. It cannot withdraw funds. Your capital stays in an account you control.</p>
           <p>Your own cash works too. The rules are the same; the profile is different. More exchanges are coming.</p>
           <p class="dim">Not for you if you need to scale in, pick size every tick, max the leverage slider for the adrenaline, or watch live PnL to feel in control. That is a terminal. This is a leash.</p>
@@ -401,7 +401,7 @@
     </div>
 
     <div class="form" style="display: grid; gap: 18px;">
-      <p>handld is in private testing. Leave an email and we'll write when there's a seat. Nothing else.</p>
+      <p>handld is in private testing. Leave an email and we'll reach out when there's access - and with occasional product updates by email.</p>
 
       <label class="field" for="access-email">
         <span>email</span>
@@ -410,7 +410,7 @@
 
       <label class="consent" for="access-consent">
         <input type="checkbox" id="access-consent" name="consent" required>
-        <span>I agree that handld stores this address to contact me about access. No newsletter, no third parties, nothing else. Delete it on request: write to the same address.</span>
+        <span>I agree that handld stores this address to contact me about access and to send product updates by email. No third parties. Delete it on request: write to the same address.</span>
       </label>
 
       <div class="actions">
@@ -466,7 +466,7 @@
 
     function done() {
       dlg.setAttribute("data-state", "done");
-      note.textContent = "We'll write when there's a seat.";
+      note.textContent = "We'll write when there's access.";
     }
 
     send.addEventListener("click", function (e) {
@@ -524,7 +524,7 @@
     var deskHTML = desk.innerHTML;
     var lines = [
       "long BTC invalidation 76500",
-      "short SIL invalidation 32.40"
+      "short silver invalidation 32.40"
     ];
     var cur = document.createElement("span"); cur.className = "cursor";
     var lineIdx = 0;
