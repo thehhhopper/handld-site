@@ -490,14 +490,25 @@
         })
       }).then(function (r) {
         return r.json().then(function (data) {
-          if (!r.ok) throw new Error((data && data.message) || String(r.status));
+          var okFlag = data && (data.success === true || data.success === "true");
+          if (!r.ok || !okFlag) {
+            var msg = (data && data.message) || ("HTTP " + r.status);
+            var err2 = new Error(msg);
+            err2.payload = data;
+            throw err2;
+          }
           return data;
         });
       }).then(function () {
         done();
-      }).catch(function () {
+      }).catch(function (e) {
         send.setAttribute("aria-disabled", "false");
-        err.textContent = "That didn't go through. Try again, or write to " + CONTACT + ".";
+        var msg = (e && e.message) || "";
+        if (/activation/i.test(msg)) {
+          err.textContent = "Almost. Confirm the activation email at the desk inbox, then try again.";
+        } else {
+          err.textContent = "That didn't go through. Try again, or write to " + CONTACT + ".";
+        }
       });
     });
   })();
