@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="You find the trades. The rest is handled. A risk desk for traders. Built for funded accounts and Hyperliquid.">
+<meta name="description" content="You find the trades. The rest is handled. No more max leverage, all-in size, or averaging down. A risk desk for funded accounts and Hyperliquid.">
 <meta property="og:title" content="handld">
 <meta property="og:description" content="You find the trades. The rest is handled.">
 <title>handld</title>
@@ -127,7 +127,22 @@
     font-size: clamp(38px, 6.2vw, 72px); line-height: 1.02; letter-spacing: -0.025em;
     font-weight: 700; margin: 0 0 24px; text-wrap: balance; max-width: 21ch;
   }
+  .subhead {
+    font-size: clamp(22px, 2.8vw, 28px); line-height: 1.25; letter-spacing: -0.015em;
+    font-weight: 600; color: var(--ink); max-width: 28ch; margin: -8px 0 20px; text-wrap: balance;
+  }
   .lede { font-size: 20px; line-height: 1.5; color: var(--ink-2); max-width: var(--measure); margin: 0 0 40px; text-wrap: pretty; }
+  .nomore { list-style: none; margin: 28px 0 0; padding: 0; max-width: 760px; border-top: 1px solid var(--ink); counter-reset: nomore; }
+  .nomore li {
+    display: grid; grid-template-columns: 56px 1fr; gap: 16px;
+    padding: 18px 0; border-bottom: 1px solid var(--rule); counter-increment: nomore;
+  }
+  .nomore li::before { content: counter(nomore, decimal-leading-zero); font-family: var(--mono); font-size: 13px; color: var(--stop); padding-top: 3px; }
+  .nomore strong { display: block; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; }
+  .nomore span { display: block; color: var(--ink-2); font-size: 16px; line-height: 1.45; }
+  @media (max-width: 720px) {
+    .nomore li { grid-template-columns: 40px 1fr; }
+  }
 
   .exchange {
     font-family: var(--mono); font-size: 15px; line-height: 1.7;
@@ -231,6 +246,7 @@
         <div class="ref eyebrow">A risk desk<br>for traders</div>
         <div>
           <h1>You find the trades. The rest is handled.</h1>
+          <p class="subhead">The market didn't blow your account. The slider did.</p>
           <p class="lede">Direction, symbol, invalidation. handld sizes the position, places the stop where a sweep can't reach it, and closes the day when your rules say so. You never see the account.</p>
 
           <div class="exchange" id="exchange" aria-label="An example exchange with the desk">
@@ -242,12 +258,34 @@
 
           <div class="cta">
             <button type="button" class="btn" data-open-access>Request access</button>
-            <a class="quiet" href="#how">How it decides ↓</a>
+            <a class="quiet" href="#nomore">No more ↓</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+  <section id="nomore">
+    <div class="wrap">
+      <div class="ledger">
+        <div class="ref eyebrow">Pain</div>
+        <div>
+          <h2>No more.</h2>
+          <p class="dim">The desk doesn't argue. The grammar doesn't have the words.</p>
+          <ol class="nomore">
+            <li><div><strong>No more revenge trading after a stop-out or a red day.</strong><span>When the day loss line is hit, the desk is done. Restarting the terminal does nothing.</span></div></li>
+            <li><div><strong>No more moving the stop "just this once."</strong><span>Stops only move further away. Closer is not a verb here.</span></div></li>
+            <li><div><strong>No more blowing or ignoring the daily loss line.</strong><span>The lockout lives on the server.</span></div></li>
+            <li><div><strong>No more averaging down or adding size to be right.</strong><span>Same correlation group &mdash; a second call waits.</span></div></li>
+            <li><div><strong>No more yeeting the leverage slider or going all-in on the candle.</strong><span>Size comes from your invalidation and your earned risk.</span></div></li>
+            <li><div><strong>No more staring at PnL until you negotiate with yourself.</strong><span>Taken and refused look the same.</span></div></li>
+            <li><div><strong>No more loosening rules mid-tilt.</strong><span>Tighten is instant. Loosen waits seven days.</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="why">
     <div class="wrap">
@@ -255,7 +293,7 @@
         <div class="ref eyebrow">Why</div>
         <div>
           <h2>Accounts don't die from the market. They die from the trader.</h2>
-          <p class="dim">The size bump after a red week. The stop moved at two in the afternoon because today feels different. Just this once. Every one of them is a decision made with the number in front of you.</p>
+          <p class="dim">The leverage pegged at the top. The size that uses the whole account. The second entry into a loser because the first "just needs room." The stop moved at two in the afternoon because today feels different. Just this once. Every one of them is a decision made with the number in front of you.</p>
           <p>handld takes the number away.</p>
         </div>
       </div>
@@ -333,6 +371,7 @@
           <p class="dim">A daily-drawdown breach doesn't cost you a bad day. It costs the account and the payout behind it. handld enforces the firm's line at eighty percent of the line, never at it, and refuses a trade it couldn't hold to its own time stop before the forced flat.</p>
           <p class="dim">On Hyperliquid the desk trades through an API wallet that can place orders but cannot withdraw. The worst a compromised desk can do is trade badly. It cannot take the money.</p>
           <p>Your own cash works too. The rules are the same; the profile is different. More exchanges are coming.</p>
+          <p class="dim">Not for you if you need to scale in, pick size every tick, or watch live PnL to feel in control. That is a terminal. This is a leash.</p>
         </div>
       </div>
     </div>
