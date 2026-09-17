@@ -414,7 +414,7 @@
       </label>
 
       <div class="actions">
-        <a class="btn" id="access-send" href="#" aria-disabled="true" rel="noopener">Request access</a>
+        <button type="button" class="btn" id="access-send" aria-disabled="true">Request access</button>
         <span class="err" id="access-err" aria-live="polite"></span>
       </div>
     </div>
@@ -429,13 +429,11 @@
 
 <script>
   // ── access request ────────────────────────────────────────────────
-  // FORM_ENDPOINT: leave empty on this preview, where the sandbox cannot
-  // post anywhere, and the request opens in the visitor's mail client.
-  // On handld.xyz set it to a real endpoint and the form posts JSON:
-  //   { email, consent: true, consentedAt, source: "landing" }
+  // Posts JSON to FormSubmit (no mailto / no mail app). Destination inbox
+  // must confirm once via FormSubmit's activation email.
   (function () {
-    var FORM_ENDPOINT = "";
-    var CONTACT = "hello@handld.xyz";
+    var FORM_ENDPOINT = "https://formsubmit.co/ajax/therestishandled@gmail.com";
+    var CONTACT = "therestishandled@gmail.com";
 
     var dlg = document.getElementById("access");
     var form = document.getElementById("access-form");
@@ -444,19 +442,11 @@
     var send = document.getElementById("access-send");
     var err = document.getElementById("access-err");
     var note = document.getElementById("access-done-note");
-    if (!dlg || !form) return;
+    if (!dlg || !form || !send) return;
 
     function valid() {
       var ok = email.validity.valid && email.value.trim().length > 3 && consent.checked;
       send.setAttribute("aria-disabled", ok ? "false" : "true");
-      if (ok && !FORM_ENDPOINT) {
-        var body = "Please add me to the handld access list.\n\nEmail: " + email.value.trim() +
-                   "\nConsent: yes, to be contacted about access only.\nConsented at: " + new Date().toISOString();
-        send.href = "mailto:" + CONTACT + "?subject=" + encodeURIComponent("handld access request") +
-                    "&body=" + encodeURIComponent(body);
-      } else {
-        send.href = "#";
-      }
       return ok;
     }
     email.addEventListener("input", valid);
@@ -476,24 +466,34 @@
 
     function done() {
       dlg.setAttribute("data-state", "done");
-      if (!FORM_ENDPOINT) note.textContent = "If your mail app didn't open, write to " + CONTACT + " and we'll add you.";
+      note.textContent = "We'll write when there's a seat.";
     }
 
     send.addEventListener("click", function (e) {
+      e.preventDefault();
       if (!valid()) {
-        e.preventDefault();
         err.textContent = !email.validity.valid ? "That email doesn't look right." : "Tick the box so we're allowed to write to you.";
         return;
       }
       err.textContent = "";
-      if (!FORM_ENDPOINT) { setTimeout(done, 400); return; }   // the mailto link handles itself
-      e.preventDefault();
       send.setAttribute("aria-disabled", "true");
       fetch(FORM_ENDPOINT, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.value.trim(), consent: true, consentedAt: new Date().toISOString(), source: "landing" })
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          email: email.value.trim(),
+          consent: true,
+          consentedAt: new Date().toISOString(),
+          source: "landing",
+          _subject: "handld access request",
+          _template: "table"
+        })
       }).then(function (r) {
-        if (!r.ok) throw new Error(String(r.status));
+        return r.json().then(function (data) {
+          if (!r.ok) throw new Error((data && data.message) || String(r.status));
+          return data;
+        });
+      }).then(function () {
         done();
       }).catch(function () {
         send.setAttribute("aria-disabled", "false");
