@@ -277,10 +277,10 @@
             <li><div><strong>No more revenge trading after a stop-out or a red day.</strong><span>When the day loss line is hit, the desk is done. Restarting the terminal does nothing.</span></div></li>
             <li><div><strong>No more moving the stop "just this once."</strong><span>Stops only move further away. Closer is not a verb here.</span></div></li>
             <li><div><strong>No more blowing or ignoring the daily loss line.</strong><span>The lockout lives on the server.</span></div></li>
-            <li><div><strong>No more averaging down or adding size to be right.</strong><span>Same correlation group &mdash; a second call waits.</span></div></li>
+            <li><div><strong>No more averaging down or adding size to be right.</strong><span>Same correlation group: a second call waits.</span></div></li>
             <li><div><strong>No more yeeting the leverage slider or going all-in on the candle.</strong><span>Size comes from your invalidation and your earned risk.</span></div></li>
             <li><div><strong>No more staring at PnL until you negotiate with yourself.</strong><span>Taken and refused look the same.</span></div></li>
-            <li><div><strong>No more loosening rules mid-tilt.</strong><span>Tighten is instant. Loosen waits seven days.</span></div></li>
+            <li><div><strong>No more loosening rules mid-tilt.</strong><span>Tighten is instant. Loosen is slow on purpose.</span></div></li>
           </ol>
         </div>
       </div>
@@ -327,7 +327,7 @@
         <div class="ref eyebrow">What you don't see</div>
         <div>
           <h2>Taken and not taken read identically.</h2>
-          <p class="dim">A confirmed fill is the thread you'd pull to reconstruct your own P&amp;L. So the reply is always the same, and the account stays behind the desk.</p>
+          <p class="dim">The point is not the money on the screen. Size, PnL, and balance stay with the desk so you cannot negotiate with the number. Taken and refused both come back the same way: Handled.</p>
 
           <div class="hidden-ledger" aria-label="What is and isn't visible">
             <div class="row"><div>position size</div><div class="redact" aria-label="hidden"></div></div>
@@ -346,16 +346,16 @@
   <section id="rules">
     <div class="wrap">
       <div class="ledger">
-        <div class="ref eyebrow">Rules that can't be talked out of</div>
+        <div class="ref eyebrow">How capital is protected</div>
         <div>
-          <h2>Everything moves one way.</h2>
-          <p class="dim">The desk can always reduce your exposure. It can never increase it on the spot.</p>
+          <h2>Risk first. Then the rules hold.</h2>
+          <p class="dim">You set risk and objectives with the desk once. After that the ruleset protects the capital. In the heat of a session it can cut exposure. It will not let you expand risk because the last trade stung.</p>
           <ol class="rules">
-            <li><div><h3>Tightening is instant. Loosening takes seven days.</h3><p>Cut your daily limit and it's cut now. Raise it and the old rule stays live for a week. Cancel the raise and that's instant again.</p></div></li>
-            <li><div><h3>Risk is earned, not set.</h3><p>Everyone starts at half a percent. The desk raises it only when your own results are statistically clear of breakeven, and cuts it the moment they aren't.</p></div></li>
-            <li><div><h3>A stop moves further away, never closer.</h3><p>If your invalidation sits where a sweep would take it, the stop goes beyond the swing. The cost lands on size, never on risk.</p></div></li>
-            <li><div><h3>Silver is silver.</h3><p>Two tickers on one metal are one position. A second call inside a live group waits its turn.</p></div></li>
-            <li><div><h3>Minus two R ends the day.</h3><p>Not two red trades. Two units of realised loss, however you got there. The lockout lives on the server. Restarting the terminal doesn't clear it.</p></div></li>
+            <li><div><h3>Objectives are set together.</h3><p>Day loss, week loss, and how much risk you are willing to put on a trade are chosen up front. That envelope is the commitment.</p></div></li>
+            <li><div><h3>The ruleset enforces what you already agreed.</h3><p>Size, stops, and lockouts follow the rules - not the mood after a red or a green. There is no override verb in the grammar.</p></div></li>
+            <li><div><h3>Exposure only shrinks in the moment.</h3><p>The desk can always reduce risk on the spot. Raising risk is slow and deliberate, never a tilt move.</p></div></li>
+            <li><div><h3>Stops protect capital, not ego.</h3><p>Invalidation sets the idea. The desk may place the stop further from a sweep. It never pulls it closer because it "feels safe now."</p></div></li>
+            <li><div><h3>Correlated risk is one book.</h3><p>Two tickers on the same idea are one exposure. A second call into a live group waits. Capital is not doubled by renaming the chart.</p></div></li>
           </ol>
         </div>
       </div>
@@ -367,11 +367,12 @@
       <div class="ledger">
         <div class="ref eyebrow">Who it's for</div>
         <div>
-          <h2>Built for funded accounts and Hyperliquid.</h2>
-          <p class="dim">A daily-drawdown breach doesn't cost you a bad day. It costs the account and the payout behind it. handld enforces the firm's line at eighty percent of the line, never at it, and refuses a trade it couldn't hold to its own time stop before the forced flat.</p>
-          <p class="dim">On Hyperliquid the desk trades through an API wallet that can place orders but cannot withdraw. The worst a compromised desk can do is trade badly. It cannot take the money.</p>
+          <h2>Built for funded seats on Hyperliquid - and your own book.</h2>
+          <p class="dim">On-chain prop firms like Propr are not classic FX props. There is often no consistency rule, no minimum trading days, and no end-of-day flatten ritual. What ends the seat is equity: a daily loss line and a max drawdown (static or trailing), checked with floating PnL included. Touch the line and the account is gone.</p>
+          <p class="dim">handld is built for that world. You map the firm's daily and drawdown limits into the desk. We enforce a buffer inside those lines so a revenge trade or a maxed slider does not spend the seat. Same idea on your own Hyperliquid wallet: risk and objectives first, then the rules hold.</p>
+          <p class="dim">On Hyperliquid the desk signs with a trade-only agent wallet. It can place and manage orders on your behalf. It cannot withdraw funds. Your capital stays in an account you control.</p>
           <p>Your own cash works too. The rules are the same; the profile is different. More exchanges are coming.</p>
-          <p class="dim">Not for you if you need to scale in, pick size every tick, or watch live PnL to feel in control. That is a terminal. This is a leash.</p>
+          <p class="dim">Not for you if you need to scale in, pick size every tick, max the leverage slider for the adrenaline, or watch live PnL to feel in control. That is a terminal. This is a leash.</p>
         </div>
       </div>
     </div>
@@ -501,34 +502,46 @@
     });
   })();
 
-  // The hero exchange types itself once. The resting state is already in
-  // the HTML, so a thumbnail, a reader without JS, and anyone who asked for
-  // reduced motion all get the finished lines.
+  // The hero exchange types itself, then repeats after a pause so the
+  // page does not look frozen. Resting HTML stays as the no-JS / reduced-
+  // motion fallback.
   (function () {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var you = document.getElementById("line-you");
     var desk = document.getElementById("line-desk");
     if (!you || !desk) return;
-    var youText = you.textContent;
+    var youText = you.textContent.trim();
     var deskHTML = desk.innerHTML;
-    you.textContent = ""; desk.innerHTML = "";
     var cur = document.createElement("span"); cur.className = "cursor";
-    you.appendChild(cur);
     var i = 0;
-    function type() {
+    var holdMs = 3200;
+    var gapMs = 900;
+    function clear() {
+      you.textContent = "";
+      desk.innerHTML = "";
+      if (!cur.parentNode) you.appendChild(cur);
+    }
+    function typeYou() {
       if (i <= youText.length) {
         you.textContent = youText.slice(0, i);
         you.appendChild(cur);
         i++;
-        setTimeout(type, 34 + Math.random() * 40);
+        setTimeout(typeYou, 34 + Math.random() * 40);
       } else {
         setTimeout(function () {
-          cur.remove();
+          if (cur.parentNode) cur.remove();
           desk.innerHTML = deskHTML;
+          setTimeout(restart, holdMs);
         }, 520);
       }
     }
-    setTimeout(type, 600);
+    function restart() {
+      i = 0;
+      clear();
+      setTimeout(typeYou, gapMs);
+    }
+    clear();
+    setTimeout(typeYou, 600);
   })();
 </script>
 
