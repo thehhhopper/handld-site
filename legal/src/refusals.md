@@ -11,4 +11,4 @@ Refusal categories under the Terms, section 5.5(b).
 - (v) **location and eligibility checks**: handld is not available in your country or current location, a VPN or proxy is suspected, or your residence and nationality declaration is missing. If your location cannot be confirmed because the location check itself is unavailable, the desk does not proceed and shows "We can't confirm your location right now. Try again later." (for orders, preceded by "Not sent."); and
 - (vi) **setup and acceptance screens**, for example when the Ruleset changed since the page loaded.
 
-Every other refusal reads "Handled."
+Any other outcome reads "Handled." That means the desk processed your idea under your ruleset. It does not tell you whether a trade was placed, or its size or stop.

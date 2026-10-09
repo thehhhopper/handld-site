@@ -15,7 +15,7 @@ This notice covers handld.xyz, the web desk at app.handld.xyz, invitations, onbo
 | Contact and account | Email address, login identifiers, account settings, invitation code, Terms and Ruleset acceptance records (version, time) | You |
 | Wallet | Your Hyperliquid account (wallet) address; the public address of the trade-only agent wallet you authorise | You, Hyperliquid |
 | Eligibility declarations | Declared country of residence; every nationality you declare; age confirmation (18+) | You |
-| Location and device signals | IP address, IP-derived country/region, VPN/proxy/datacenter indicators, browser and device data, session times | Your device, IP geolocation provider (to be confirmed) |
+| Location and device signals | IP address, IP-derived country/region, VPN/proxy/datacenter indicators, browser and device data, session times | Your device. IP geolocation: DB-IP (db-ip.com) IP to City Lite database, processed locally on our server; your IP is not sent to DB-IP. |
 | Sanctions screening record | Name, date of birth, nationalities and residence as screened; wallet address screened; lists checked, results, reviewer, date | You, public sanctions lists |
 | Trading data and audit log | The symbol, direction and invalidation you send; the size and stop the Ruleset calculates; allow/refuse reason; Ruleset version; orders, fills, fees and positions on your Hyperliquid account placed or affected by the desk; timestamps | You, the desk, Hyperliquid |
 | Support and communications | Messages you send us, and our replies | You |

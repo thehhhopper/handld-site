@@ -77,7 +77,9 @@ Version: to be confirmed. Effective date: to be confirmed. Last updated: 9 Oct 2
 - (v) **location and eligibility checks**: handld is not available in your country or current location, a VPN or proxy is suspected, or your residence and nationality declaration is missing. If your location cannot be confirmed because the location check itself is unavailable, the desk does not proceed and shows "We can't confirm your location right now. Try again later." (for orders, preceded by "Not sent."); and
 - (vi) **setup and acceptance screens**, for example when the Ruleset changed since the page loaded.
 
-These categories are set out in [Schedule 1](/legal/refusals), and may be updated as the product changes. **Every other refusal reads "Handled."** None of these messages shows size, stop, leverage, gains or losses, or the name of the rule that applied.
+Any other outcome reads "Handled." That means the desk processed your idea under your ruleset. It does not tell you whether a trade was placed, or its size or stop.
+
+These categories are set out in [Schedule 1](/legal/refusals), and may be updated as the product changes. None of these messages shows size, stop, leverage, gains or losses, or the name of the rule that applied.
 
 - (c) handld's operator tools and audit log **do** record, for every trade, your inputs, the calculated size and stop (including whether the stop sits further than your invalidation), the allow or refuse reason, the Ruleset version and timestamps.
 - (d) **You can always see your actual positions, open orders, fills, fees and balances directly in your own Hyperliquid account**, outside handld.
