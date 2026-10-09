@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="handld Privacy Notice. Draft, invite-only beta, pending counsel review.">
+<title>handld Privacy Notice</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --paper: #EDF0EF;
+    --paper-2: #E3E8E6;
+    --rule: #C7CFCC;
+    --ink: #0F1A24;
+    --ink-2: #4B5760;
+    --ink-3: #7A868E;
+    --stop: #2440C4;
+    --stop-soft: rgba(36, 64, 196, 0.10);
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --sans: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0B1219; --paper-2: #101922; --rule: #22303B;
+      --ink: #E6EAE8; --ink-2: #9AA6AE; --ink-3: #6B7880;
+      --stop: #7D93FF; --stop-soft: rgba(125, 147, 255, 0.14);
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: var(--stop); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--stop); outline-offset: 3px; }
+  .banner {
+    margin: 0; background: var(--stop-soft); color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 13px; line-height: 1.45;
+    padding: 12px 24px; text-align: center; text-wrap: balance;
+  }
+  header { border-bottom: 1px solid var(--rule); }
+  header .bar, footer .wrap {
+    max-width: 1120px; margin: 0 auto; padding-inline: 24px;
+  }
+  header .bar {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px 24px; flex-wrap: wrap; padding-block: 22px;
+  }
+  .mark {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.02em;
+    color: var(--ink); font-size: 22px; text-decoration: none;
+  }
+  .mark .stop { color: var(--stop); }
+  a.mark:hover { text-decoration: none; }
+  header nav, footer .cols {
+    display: flex; flex-wrap: wrap; gap: 10px 18px;
+    font-family: var(--mono); font-size: 13px;
+  }
+  header nav a, footer .cols a { color: var(--ink-2); text-decoration: none; }
+  header nav a:hover, footer .cols a:hover { color: var(--stop); text-decoration: underline; text-underline-offset: 3px; }
+  header nav a[aria-current="page"] { color: var(--ink); }
+  main { padding: 36px 0 72px; }
+  article { max-width: 760px; margin: 0 auto; padding-inline: 24px; }
+  article h1 {
+    font-size: clamp(32px, 6vw, 44px); line-height: 1.08; letter-spacing: -0.025em;
+    font-weight: 700; margin: 0 0 18px; text-wrap: balance;
+  }
+  article h2 {
+    font-size: clamp(22px, 3.2vw, 28px); line-height: 1.2; letter-spacing: -0.02em;
+    font-weight: 700; margin: 36px 0 12px; text-wrap: balance;
+  }
+  article h3 { font-size: 18px; line-height: 1.3; margin: 28px 0 8px; font-weight: 600; }
+  article p { margin: 0 0 16px; overflow-wrap: break-word; }
+  article ul, article ol { margin: 0 0 16px; padding-left: 1.25em; }
+  article li { margin: 0.4em 0; padding-left: 0.15em; overflow-wrap: break-word; }
+  article li::marker { color: var(--stop); }
+  article strong { font-weight: 600; }
+  article code {
+    font-family: var(--mono); font-size: 0.9em;
+    background: var(--paper-2); padding: 0.05em 0.35em; border-radius: 2px;
+  }
+  article p a, article li a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  ul.index { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid var(--ink); }
+  ul.index li { margin: 0; padding: 0; border-bottom: 1px solid var(--rule); }
+  ul.index a {
+    display: block; padding: 16px 0; color: var(--ink);
+    font-size: 20px; font-weight: 600; letter-spacing: -0.015em; text-decoration: none;
+  }
+  ul.index a:hover { color: var(--stop); }
+  .table-scroll { margin: 0 0 20px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.45; }
+  th, td {
+    text-align: left; vertical-align: top; padding: 10px 16px 10px 0;
+    border-bottom: 1px solid var(--rule); overflow-wrap: anywhere;
+  }
+  th {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+    border-bottom: 1px solid var(--ink);
+  }
+  footer { border-top: 1px solid var(--ink); }
+  footer .wrap {
+    display: grid; grid-template-columns: 128px 1fr; column-gap: 40px;
+    padding-block: 40px 56px;
+  }
+  footer .mark { font-size: 20px; }
+  @media (max-width: 720px) {
+    main { padding: 28px 0 56px; }
+    footer .wrap { grid-template-columns: 1fr; row-gap: 20px; }
+    table, thead, tbody, tr, th, td { display: block; width: auto; }
+    thead {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    tr { border-bottom: 1px solid var(--rule); padding: 12px 0; }
+    td, th { border-bottom: 0; padding: 6px 0; }
+    td::before {
+      content: attr(data-label);
+      display: block; font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+      margin-bottom: 2px;
+    }
+  }
+</style>
+</head>
+<body>
+<p class="banner" role="note">Draft, invite-only beta, pending counsel review.</p>
+<header>
+  <div class="bar">
+    <a class="mark" href="/">handld<span class="stop">.</span></a>
+    <nav aria-label="Legal">
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/" aria-current="page">Privacy</a>
+        <a href="/risk/">Risk notice</a>
+        <a href="/legal/">Legal</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <article>
+    <h1>handld Privacy Notice</h1>
+    <p>Version: to be confirmed. Effective date: to be confirmed. Last updated: 9 Oct 2026.</p>
+    <h2>1. Who is responsible for your data</h2>
+    <p>handld (company in formation) ("handld", "we") is the controller of the personal data described here. Contact for privacy questions and requests: <a href="mailto:therestishandled@gmail.com">therestishandled@gmail.com</a>.</p>
+    <p>This notice covers handld.xyz, the web desk at app.handld.xyz, invitations, onboarding, support and any waitlist.</p>
+    <h2>2. What we collect</h2>
+    <div class="table-scroll">
+    <table>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Examples</th>
+    <th>Where it comes from</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td data-label="Category">Contact and account</td>
+    <td data-label="Examples">Email address, login identifiers, account settings, invitation code, Terms and Ruleset acceptance records (version, time)</td>
+    <td data-label="Where it comes from">You</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Wallet</td>
+    <td data-label="Examples">Your Hyperliquid account (wallet) address; the public address of the trade-only agent wallet you authorise</td>
+    <td data-label="Where it comes from">You, Hyperliquid</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Eligibility declarations</td>
+    <td data-label="Examples">Declared country of residence; every nationality you declare; age confirmation (18+)</td>
+    <td data-label="Where it comes from">You</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Location and device signals</td>
+    <td data-label="Examples">IP address, IP-derived country/region, VPN/proxy/datacenter indicators, browser and device data, session times</td>
+    <td data-label="Where it comes from">Your device. IP geolocation: DB-IP (db-ip.com) IP to City Lite database, processed locally on our server; your IP is not sent to DB-IP.</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Sanctions screening record</td>
+    <td data-label="Examples">Name, date of birth, nationalities and residence as screened; wallet address screened; lists checked, results, reviewer, date</td>
+    <td data-label="Where it comes from">You, public sanctions lists</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Trading data and audit log</td>
+    <td data-label="Examples">The symbol, direction and invalidation you send; the size and stop the Ruleset calculates; allow/refuse reason; Ruleset version; orders, fills, fees and positions on your Hyperliquid account placed or affected by the desk; timestamps</td>
+    <td data-label="Where it comes from">You, the desk, Hyperliquid</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Support and communications</td>
+    <td data-label="Examples">Messages you send us, and our replies</td>
+    <td data-label="Where it comes from">You</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Billing (only once paid seats exist)</td>
+    <td data-label="Examples">Name, billing country, payment status and limited card details as handled by Stripe. We do not see full card numbers</td>
+    <td data-label="Where it comes from">You, Stripe</td>
+    </tr>
+    <tr>
+    <td data-label="Category">Website and analytics</td>
+    <td data-label="Examples">none</td>
+    <td data-label="Where it comes from">none</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>We do not ask for, and you must never send us, your Hyperliquid master private key or seed phrase.</p>
+    <p>Note on the opacity of the desk: the trading screen does not show you size, stop or refusal reasons, but <strong>we do record them</strong> in the operator tools and audit log, and they are personal data about you. See section 8 on your right of access.</p>
+    <h2>3. Why we use it and our legal basis</h2>
+    <p>Lawful bases are under the EU General Data Protection Regulation (GDPR). The basis for each purpose below is to be confirmed.</p>
+    <div class="table-scroll">
+    <table>
+    <thead>
+    <tr>
+    <th>Purpose</th>
+    <th>Data used</th>
+    <th>Lawful basis (to be confirmed)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td data-label="Purpose">Create and run your account; send your trades to Hyperliquid under your accepted Ruleset; enforce lockouts; keep the desk working</td>
+    <td data-label="Data used">Account, wallet, trading data, device data</td>
+    <td data-label="Lawful basis (to be confirmed)">Performance of a contract (Art. 6(1)(b))</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Check eligibility (age, residence, location, nationality) and enforce the geo gate, including VPN/proxy detection</td>
+    <td data-label="Data used">Eligibility declarations, location and device signals</td>
+    <td data-label="Lawful basis (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Sanctions screening of invitees and users, including wallet address</td>
+    <td data-label="Data used">Screening record, eligibility declarations, wallet</td>
+    <td data-label="Lawful basis (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Keep an audit log of instructions, calculated parameters and outcomes</td>
+    <td data-label="Data used">Trading data and audit log</td>
+    <td data-label="Lawful basis (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Security, fraud and abuse prevention; investigating incidents</td>
+    <td data-label="Data used">Device, location, account, logs</td>
+    <td data-label="Lawful basis (to be confirmed)">Legitimate interests (Art. 6(1)(f)) in securing the Service and users' accounts</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Support and complaints</td>
+    <td data-label="Data used">Support messages, account, relevant trading data</td>
+    <td data-label="Lawful basis (to be confirmed)">Contract; legitimate interests</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Service emails (onboarding, Ruleset or Terms changes, security notices)</td>
+    <td data-label="Data used">Email</td>
+    <td data-label="Lawful basis (to be confirmed)">Contract; legitimate interests</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Waitlist or product news emails (if any)</td>
+    <td data-label="Data used">Email</td>
+    <td data-label="Lawful basis (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Billing (once paid seats exist)</td>
+    <td data-label="Data used">Billing data</td>
+    <td data-label="Lawful basis (to be confirmed)">Contract; legal obligation (accounting and tax)</td>
+    </tr>
+    <tr>
+    <td data-label="Purpose">Establishing or defending legal claims; responding to lawful requests from authorities</td>
+    <td data-label="Data used">Any relevant data</td>
+    <td data-label="Lawful basis (to be confirmed)">Legitimate interests; legal obligation</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>Nationality data is not a "special category" under GDPR, but it is sensitive in practice. We use it only for eligibility and sanctions purposes.</p>
+    <p><strong>Automated decisions.</strong> The desk applies the Ruleset automatically, including refusing trades and applying lockouts. Signup and access may also be refused automatically on eligibility or location signals. Sanctions matches are always reviewed by a person before any final decision.</p>
+    <h2>4. Who we share it with</h2>
+    <p><strong>We do not sell your personal data</strong>, and we do not share it for third-party advertising.</p>
+    <p>We share personal data only as needed with:</p>
+    <ul>
+    <li><strong>Processors</strong> acting on our instructions under a data processing agreement: to be confirmed.</li>
+    <li><strong>Hyperliquid</strong>, the venue where your account sits and where the desk places orders. Orders and the builder fee placed by the desk are associated with your Hyperliquid address on Hyperliquid. Hyperliquid processes data under its own terms and privacy practices, and activity on Hyperliquid may be publicly visible on its ledger.</li>
+    <li><strong>Stripe</strong>, once paid seats exist, for payments. Stripe may act as an independent controller for some purposes under its own privacy policy.</li>
+    <li><strong>Professional advisers</strong> (lawyers, accountants, auditors) under confidentiality.</li>
+    <li><strong>Authorities</strong>, courts or regulators, where the law requires it or to establish, exercise or defend legal claims.</li>
+    <li>A successor, if the business or its assets are transferred, subject to this notice.</li>
+    </ul>
+    <h2>5. International transfers</h2>
+    <p>Some processors may process data outside the European Economic Area. Where they do, we rely on a transfer mechanism to be confirmed. You can request a copy of the relevant transfer terms at <a href="mailto:therestishandled@gmail.com">therestishandled@gmail.com</a>. Data on Hyperliquid is recorded on a public ledger that is not located in any one country.</p>
+    <h2>6. How long we keep it</h2>
+    <div class="table-scroll">
+    <table>
+    <thead>
+    <tr>
+    <th>Data</th>
+    <th>Retention (to be confirmed)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td data-label="Data">Account and contact data</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Eligibility declarations and geo-gate logs</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Sanctions screening records (including refused invitees)</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Trading data and audit log</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed. The audit log is designed to be tamper-evident and append-only; see section 8 on erasure</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Support messages</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Security and access logs</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Billing records (once paid seats exist)</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    <tr>
+    <td data-label="Data">Waitlist email</td>
+    <td data-label="Retention (to be confirmed)">to be confirmed</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>When a retention period ends we delete or irreversibly anonymise the data.</p>
+    <h2>7. Security</h2>
+    <p>We use technical and organisational measures appropriate to the risk, including access controls, encryption in transit, and limiting operator access to the audit log. The desk holds only a trade-only agent key that cannot withdraw funds. No system is free of risk. If a personal data breach is likely to put you at high risk, we will tell you without undue delay.</p>
+    <h2>8. Your rights</h2>
+    <p>Where GDPR applies, you have the right to:</p>
+    <ul>
+    <li><strong>access</strong> your personal data and receive a copy;</li>
+    <li><strong>rectify</strong> inaccurate data;</li>
+    <li><strong>erase</strong> data, where the law allows. Some data, such as sanctions screening records and audit-log entries, may need to be kept for legal obligations or legal claims;</li>
+    <li><strong>restrict</strong> processing;</li>
+    <li><strong>data portability</strong> for data you provided, processed by automated means on the basis of contract or consent;</li>
+    <li><strong>object</strong> to processing based on legitimate interests, and to direct marketing at any time;</li>
+    <li><strong>withdraw consent</strong> at any time, where we rely on consent, without affecting earlier processing;</li>
+    <li>not be subject to a solely automated decision with legal or similarly significant effects, where Art. 22 applies (see section 3).</li>
+    </ul>
+    <p>To exercise a right, email <a href="mailto:therestishandled@gmail.com">therestishandled@gmail.com</a>. We may need to verify your identity. We respond within one month, extendable where the law allows.</p>
+    <p>If you live outside the EEA, you may have similar rights under your local law.</p>
+    <h2>9. Complaints</h2>
+    <p>You can complain to us first at <a href="mailto:therestishandled@gmail.com">therestishandled@gmail.com</a>. You also have the right to complain to a data protection supervisory authority, in particular in the EU Member State where you live or work or where an alleged infringement took place. Our lead authority in Estonia is:</p>
+    <p><strong>Andmekaitse Inspektsioon (Estonian Data Protection Inspectorate)</strong></p>
+    <p>Tatari 39, 10134 Tallinn, Estonia. Phone +372 627 4135. <a href="https://www.aki.ee/en">https://www.aki.ee/en</a></p>
+    <h2>10. Age</h2>
+    <p>The Service is only for people aged 18 or over. We do not knowingly collect data from anyone under 18. If we learn we have, we will delete it, subject to section 6.</p>
+    <h2>11. Cookies</h2>
+    <p>Cookie use on the Service is to be confirmed.</p>
+    <h2>12. Changes</h2>
+    <p>We will post updates here and, for material changes, tell you by a method to be confirmed before they apply.</p>
+  </article>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="mark" href="/">handld<span class="stop">.</span></a>
+    <div class="cols">
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/risk/">Risk notice</a>
+        <a href="/legal/">Legal</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
