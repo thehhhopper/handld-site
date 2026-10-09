@@ -8,8 +8,9 @@ the committed HTML in place. GitHub Pages publishes those files as-is.
     python scripts/build-legal.py --check
 
 --check rebuilds in memory, fails if that HTML differs from what is
-committed, and always fails if rendered HTML contains an em dash (U+2014)
-or a leftover {{ token.
+committed, and always fails if rendered HTML contains an em dash (U+2014),
+a leftover {{ token, the phrase "Every other refusal", or a Handled
+paragraph that is not word for word.
 """
 
 from __future__ import annotations
@@ -17,7 +18,7 @@ from __future__ import annotations
 import difflib
 import re
 import sys
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,6 +27,13 @@ SRC_DIR = ROOT / "legal" / "src"
 # Contact address for every {{LEGAL_CONTACT_EMAIL}} token. One definition.
 LEGAL_CONTACT_EMAIL = "therestishandled@gmail.com"
 DRAFT_BANNER = "Draft, invite-only beta, pending counsel review."
+# Shared outcome sentence. Any page that starts it must continue it exactly.
+HANDLED_PARAGRAPH = (
+    'Any other outcome reads "Handled." That means the desk processed your idea '
+    "under your ruleset. It does not tell you whether a trade was placed, or its size or stop."
+)
+HANDLED_OPENING = 'Any other outcome reads "Handled."'
+FORBIDDEN_PHRASE = "Every other refusal"
 MARKDOWN_VERSION = "3.11"
 
 # Filename -> published directory index. Swap the file contents freely.
@@ -460,8 +468,37 @@ def check_index_footer() -> list[str]:
     return problems
 
 
+def visible_text(html: str) -> str:
+    without_style = re.sub(r"<style\b[^>]*>.*?</style>", " ", html, flags=re.IGNORECASE | re.DOTALL)
+    return unescape(TAG.sub("", without_style))
+
+
+def check_handled_wording(pages: dict[str, str]) -> list[str]:
+    """Each Handled paragraph must match word for word, and the old phrase must be gone."""
+    problems = []
+    documents = dict(pages)
+    index = ROOT / "index.html"
+    if index.is_file():
+        documents.setdefault("index.html", index.read_text(encoding="utf-8"))
+    for path, html in documents.items():
+        text = visible_text(html)
+        if FORBIDDEN_PHRASE in text or FORBIDDEN_PHRASE in html:
+            problems.append(f"{path}: contains {FORBIDDEN_PHRASE!r}")
+        start = 0
+        while True:
+            found = text.find(HANDLED_OPENING, start)
+            if found < 0:
+                break
+            if not text.startswith(HANDLED_PARAGRAPH, found):
+                problems.append(f"{path}: {HANDLED_OPENING!r} is not the required paragraph, word for word")
+                break
+            start = found + len(HANDLED_PARAGRAPH)
+    return problems
+
+
 def check_text(pages: dict[str, str]) -> list[str]:
     problems = check_index_footer()
+    problems.extend(check_handled_wording(pages))
     for path, html in pages.items():
         if EM_DASH in html or EM_DASH_ENTITY.search(html):
             problems.append(f"{path}: rendered text contains an em dash (U+2014)")
@@ -511,7 +548,7 @@ def main(argv: list[str]) -> None:
     if problems:
         fail(problems)
     if check_only:
-        print("fresh build matches committed HTML; no em dash; no leftover tokens")
+        print("fresh build matches committed HTML; no em dash; no leftover tokens; Handled wording ok")
         return
     write_pages(pages)
     print("wrote " + ", ".join(pages))
