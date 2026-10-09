@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="handld Trading Risk Disclosure. Draft, invite-only beta, pending counsel review.">
+<title>handld Trading Risk Disclosure</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --paper: #EDF0EF;
+    --paper-2: #E3E8E6;
+    --rule: #C7CFCC;
+    --ink: #0F1A24;
+    --ink-2: #4B5760;
+    --ink-3: #7A868E;
+    --stop: #2440C4;
+    --stop-soft: rgba(36, 64, 196, 0.10);
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --sans: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0B1219; --paper-2: #101922; --rule: #22303B;
+      --ink: #E6EAE8; --ink-2: #9AA6AE; --ink-3: #6B7880;
+      --stop: #7D93FF; --stop-soft: rgba(125, 147, 255, 0.14);
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: var(--stop); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--stop); outline-offset: 3px; }
+  .banner {
+    margin: 0; background: var(--stop-soft); color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 13px; line-height: 1.45;
+    padding: 12px 24px; text-align: center; text-wrap: balance;
+  }
+  header { border-bottom: 1px solid var(--rule); }
+  header .bar, footer .wrap {
+    max-width: 1120px; margin: 0 auto; padding-inline: 24px;
+  }
+  header .bar {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px 24px; flex-wrap: wrap; padding-block: 22px;
+  }
+  .mark {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.02em;
+    color: var(--ink); font-size: 22px; text-decoration: none;
+  }
+  .mark .stop { color: var(--stop); }
+  a.mark:hover { text-decoration: none; }
+  header nav, footer .cols {
+    display: flex; flex-wrap: wrap; gap: 10px 18px;
+    font-family: var(--mono); font-size: 13px;
+  }
+  header nav a, footer .cols a { color: var(--ink-2); text-decoration: none; }
+  header nav a:hover, footer .cols a:hover { color: var(--stop); text-decoration: underline; text-underline-offset: 3px; }
+  header nav a[aria-current="page"] { color: var(--ink); }
+  main { padding: 36px 0 72px; }
+  article { max-width: 760px; margin: 0 auto; padding-inline: 24px; }
+  article h1 {
+    font-size: clamp(32px, 6vw, 44px); line-height: 1.08; letter-spacing: -0.025em;
+    font-weight: 700; margin: 0 0 18px; text-wrap: balance;
+  }
+  article h2 {
+    font-size: clamp(22px, 3.2vw, 28px); line-height: 1.2; letter-spacing: -0.02em;
+    font-weight: 700; margin: 36px 0 12px; text-wrap: balance;
+  }
+  article h3 { font-size: 18px; line-height: 1.3; margin: 28px 0 8px; font-weight: 600; }
+  article p { margin: 0 0 16px; overflow-wrap: break-word; }
+  article ul, article ol { margin: 0 0 16px; padding-left: 1.25em; }
+  article li { margin: 0.4em 0; padding-left: 0.15em; overflow-wrap: break-word; }
+  article li::marker { color: var(--stop); }
+  article strong { font-weight: 600; }
+  article code {
+    font-family: var(--mono); font-size: 0.9em;
+    background: var(--paper-2); padding: 0.05em 0.35em; border-radius: 2px;
+  }
+  article p a, article li a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  ul.index { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid var(--ink); }
+  ul.index li { margin: 0; padding: 0; border-bottom: 1px solid var(--rule); }
+  ul.index a {
+    display: block; padding: 16px 0; color: var(--ink);
+    font-size: 20px; font-weight: 600; letter-spacing: -0.015em; text-decoration: none;
+  }
+  ul.index a:hover { color: var(--stop); }
+  .table-scroll { margin: 0 0 20px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.45; }
+  th, td {
+    text-align: left; vertical-align: top; padding: 10px 16px 10px 0;
+    border-bottom: 1px solid var(--rule); overflow-wrap: anywhere;
+  }
+  th {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+    border-bottom: 1px solid var(--ink);
+  }
+  footer { border-top: 1px solid var(--ink); }
+  footer .wrap {
+    display: grid; grid-template-columns: 128px 1fr; column-gap: 40px;
+    padding-block: 40px 56px;
+  }
+  footer .mark { font-size: 20px; }
+  @media (max-width: 720px) {
+    main { padding: 28px 0 56px; }
+    footer .wrap { grid-template-columns: 1fr; row-gap: 20px; }
+    table, thead, tbody, tr, th, td { display: block; width: auto; }
+    thead {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    tr { border-bottom: 1px solid var(--rule); padding: 12px 0; }
+    td, th { border-bottom: 0; padding: 6px 0; }
+    td::before {
+      content: attr(data-label);
+      display: block; font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+      margin-bottom: 2px;
+    }
+  }
+</style>
+</head>
+<body>
+<p class="banner" role="note">Draft, invite-only beta, pending counsel review.</p>
+<header>
+  <div class="bar">
+    <a class="mark" href="/">handld<span class="stop">.</span></a>
+    <nav aria-label="Legal">
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/risk/" aria-current="page">Risk notice</a>
+        <a href="/legal/">Legal</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <article>
+    <h1>handld Trading Risk Disclosure</h1>
+    <p>Version: to be confirmed. Last updated: 9 Oct 2026.</p>
+    <p>Read this before you connect your Hyperliquid account or send a trade. It is part of the handld <a href="/terms/">Terms of Use</a>. It does not list every risk.</p>
+    <p>Contact: <a href="mailto:therestishandled@gmail.com">therestishandled@gmail.com</a>.</p>
+    <h2>The short version</h2>
+    <ul>
+    <li><strong>You can lose all the money in your Hyperliquid account.</strong> Losses can happen fast.</li>
+    <li>handld does not choose your trades and does not give advice. You pick the symbol, the direction and the invalidation.</li>
+    <li><strong>You will not see the size or the stop in the desk.</strong> A placed trade and a refused trade generally both read "Handled." Check your positions in your own Hyperliquid account.</li>
+    <li>A stop is an order, not a promise. It may fill far from its price, or not at all.</li>
+    <li>Only trade with money you can afford to lose entirely.</li>
+    </ul>
+    <h2>1. Perpetual futures</h2>
+    <p>Perpetual futures ("perps") are derivatives. They let you take a position on the price of a crypto asset without owning it, with no expiry date. Crypto prices can move very sharply, at any hour, including weekends. Perps are complex and high risk and are not suitable for everyone.</p>
+    <h2>2. Leverage</h2>
+    <p>Perps on Hyperliquid are traded with leverage. Leverage means a small price move produces a much larger gain or loss relative to the margin in your account. The size the desk calculates under the Ruleset determines how much of your account is exposed on each trade, and you will not see it in the desk.</p>
+    <h2>3. Liquidation</h2>
+    <p>If losses reduce your margin below Hyperliquid's maintenance requirement, Hyperliquid can liquidate your position automatically, in whole or part, possibly before any stop fills. Liquidation is run by Hyperliquid, not handld. You can lose your margin, and liquidation can come with extra fees.</p>
+    <h2>4. Gaps, slippage and stops</h2>
+    <ul>
+    <li>A stop is an order placed on Hyperliquid. <strong>It is not a promise of any exit price.</strong> In fast or thin markets the price can jump past your stop ("gap"), and the fill can be much worse than the stop price ("slippage").</li>
+    <li>A stop can also fail to be placed, updated or triggered because of venue outages, rejected orders, rate limits, network problems, or a fault at handld.</li>
+    <li><strong>Stop versus invalidation.</strong> Your invalidation is the price where you consider your idea wrong. Under the Ruleset the stop may sit <strong>further</strong> from entry than your invalidation. It is never placed closer. So the price can pass your invalidation and keep going before the stop is reached. The stop does not hold your loss at your invalidation, or at any fixed amount.</li>
+    </ul>
+    <h2>5. Funding</h2>
+    <p>Perps charge or pay <strong>funding</strong> at regular intervals, depending on the gap between the perp price and the underlying price. Funding can work against you every interval while your position is open, and can add up over time. Funding is set by Hyperliquid and is separate from handld's fees.</p>
+    <h2>6. Hyperliquid venue risk</h2>
+    <p>Your account and positions live on Hyperliquid, an independent third party that handld does not control. Risks include:</p>
+    <ul>
+    <li><strong>Venue risk:</strong> outages, halts, changes to its rules, margin or listing decisions, delistings, or Hyperliquid restricting or closing your account.</li>
+    <li><strong>Smart-contract and protocol risk:</strong> bugs, exploits or failures in Hyperliquid's chain, bridge or contracts, which could cause loss of funds.</li>
+    <li><strong>Oracle and pricing risk:</strong> wrong or manipulated price feeds can trigger liquidations or stops at prices that do not reflect the wider market.</li>
+    <li><strong>Network risk:</strong> congestion, validator issues, or failures in the internet, wallets or browsers between you, handld and Hyperliquid.</li>
+    </ul>
+    <p>Hyperliquid states in its own terms that it is not licensed in any jurisdiction. Read Hyperliquid's terms at <a href="https://app.hyperliquid.xyz/terms">https://app.hyperliquid.xyz/terms</a>.</p>
+    <h2>7. Agent-key risk</h2>
+    <p>You authorise a trade-only agent (API) key so the desk can place and cancel orders. It cannot withdraw funds. But if that key is misused or compromised, whether at handld or on your side, someone could place or cancel orders on your account, including large or unwanted ones. You can revoke the key on Hyperliquid at any time. Revoking it stops the desk acting, but does <strong>not</strong> close your open positions or cancel your open orders. You must manage those in Hyperliquid. Never share your master private key or seed phrase with anyone.</p>
+    <h2>8. The desk is opaque. Understand this before you accept.</h2>
+    <ul>
+    <li>When you send a trade, you instruct handld to apply the Ruleset you accepted, at the size and stop it calculates, <strong>without showing you those figures first</strong>.</li>
+    <li>The desk does not show size, stop, notional, leverage or the result of a trade. A placed trade and a trade refused under the Ruleset both read <strong>"Handled."</strong> You will not be told in the desk which happened or which rule applied. Only some refusals show a plain message instead: input errors, market-data problems, setup, account or connection problems, close failures, and location or eligibility checks (the categories are set out in <a href="/legal/refusals/">Schedule 1</a> of the Terms, section 5.5(b)). Every other refusal reads "Handled.".</li>
+    <li>handld's operator tools and audit log do record size, stop, the allow or refuse reason and the Ruleset version.</li>
+    <li><strong>You can see your actual positions, orders, fills, fees and balance in your own Hyperliquid account at any time.</strong> Check it. If you do not, you may not realise a trade was placed, what size it is, or where its stop sits.</li>
+    <li>Because you cannot see the figures in the desk, a mistake in your inputs, or a fault in handld, may not be obvious to you until you check Hyperliquid.</li>
+    </ul>
+    <h2>9. A refusal is not advice</h2>
+    <p>If the desk refuses a trade, that is a rule in the Ruleset operating mechanically (for example a lockout or limit). It says nothing about whether the trade idea is good or bad. A trade the desk places is not an endorsement either. Lockouts can also stop you entering or re-entering a trade you wanted, including one that would have moved your way. After a bad month under the Ruleset, risk is held at the lowest level until month end. That is not a lockout: trades still go through the Ruleset as usual, at the lowest risk level.</p>
+    <p>If your location cannot be confirmed because the location check is unavailable, the desk will not send new trades and shows "We can't confirm your location right now. Try again later." You may be unable to open a trade during that time.</p>
+    <h2>10. Beta software</h2>
+    <p>This is an early, invite-only cohort on mainnet with real funds. The software may have bugs, behave unexpectedly, be interrupted, or change. Results from testnet or paper trading do not predict mainnet results.</p>
+    <h2>11. You can lose everything</h2>
+    <p>Total loss of the funds in your Hyperliquid account is possible. Past results, yours or anyone's, do not predict future results. handld makes no promise of any return.</p>
+    <h2>12. No regulatory protection or compensation scheme may apply</h2>
+    <p>handld's regulatory status is to be confirmed. You should assume that <strong>no investor-compensation scheme, deposit-insurance scheme, or financial ombudsman protection applies</strong> to your use of handld or to your Hyperliquid account, and that you may not have the protections you would have with a licensed broker or investment firm.</p>
+    <h2>13. Fees and costs</h2>
+    <p>handld charges a 0.01% Hyperliquid builder fee on fills of orders the desk places. Hyperliquid charges its own trading fees, and funding applies (section 5). Costs add up and reduce your account balance whether trades win or lose. There is no subscription charge during this cohort. Subscription terms will be added before any charge.</p>
+    <h2>14. Tax</h2>
+    <p>You are solely responsible for working out, reporting and paying any tax on your trading, funding and fees in every country where you owe tax. handld does not give tax advice and does not withhold tax for you.</p>
+    <h2>15. Legality where you are</h2>
+    <p>Being on handld's launch allowlist does not mean crypto derivatives, or this Service, are permitted or suitable in your country. You are responsible for following the law that applies to you.</p>
+    <h2>Acknowledgement</h2>
+    <p>I have read the Risk Disclosure. I understand that I can lose all the funds in my Hyperliquid account, that the stop may sit further than my invalidation and may not fill at its price, that size and stop are calculated under the Ruleset and not shown to me in the desk, that "Handled." does not tell me whether a trade was placed or refused, and that I can check my positions in my own Hyperliquid account.</p>
+  </article>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="mark" href="/">handld<span class="stop">.</span></a>
+    <div class="cols">
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/risk/">Risk notice</a>
+        <a href="/legal/">Legal</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
