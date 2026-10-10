@@ -73,7 +73,7 @@ Some processors may process data outside the European Economic Area. Where they 
 | Sanctions screening records (including refused invitees) | to be confirmed |
 | Trading data and audit log | to be confirmed. The audit log is designed to be tamper-evident and append-only; see section 8 on erasure |
 | Support messages | to be confirmed |
-| Security and access logs | to be confirmed |
+| Security and access logs | IP address and IP-derived location: 90 days. Event record (type and time): up to 2 years from the event. |
 | Billing records (once paid seats exist) | to be confirmed |
 | Waitlist email | to be confirmed |
 
